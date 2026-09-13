@@ -9,7 +9,7 @@ class Usuario {
         required this.email
     });
     
-    factory Usuario.frorJson(Map<String, dynamic> json){
+    factory Usuario.fromJson(Map<String, dynamic> json){
         return Usuario(
             id: json['id'] as int?,
             nombre: json['nombre'] as String? ?? '',
