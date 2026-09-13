@@ -157,4 +157,8 @@ class UsuarioService {
             throw ApiException('No fue posible registrar el usuario\n$e');
         }
     }
+    
+    void close(){
+        _client.close();
+    }
 }
