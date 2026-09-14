@@ -122,7 +122,7 @@ class UsuarioService {
         }
     }
     //metodo post para crear un usuario
-    Future<List<Usuario>> crearUsuario(Usuario usuario) async {
+    Future<Usuario> crearUsuario(Usuario usuario) async {
         try{
             final response = await  _client.post(
                 _uri('/usuarios'),
@@ -141,16 +141,14 @@ class UsuarioService {
             }
             final dynamic decoded = jsonDecode(response.body);
             
-            if(decoded is! List){
+            if(decoded is! Map){
                 throw const ApiException(
                     'La api devolvió un formato inesperado'
                 );
             }
-            return decoded.map(
-                (item) => Usuario.fromJson(
-                    Map<String, dynamic>.from(item as Map),
-                )
-            ).toList();
+            return Usuario.fromJson(
+                Map<String, dynamic>.from(decoded)
+            );
         }on ApiException{
             rethrow;
         } catch (e) {
